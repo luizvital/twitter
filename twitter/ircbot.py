@@ -165,7 +165,7 @@ class TwitterBot(object):
         debug("In check_statuses")
         try:
             updates = reversed(self.twitter.statuses.friends_timeline())
-        except Exception as e:
+        except Exception, e:
             print >> sys.stderr, "Exception while querying twitter:"
             traceback.print_exc(file=sys.stderr)
             return
@@ -341,7 +341,7 @@ def main():
         if not os.path.exists(configFilename):
             raise Exception()
         load_config(configFilename)
-    except Exception as e:
+    except Exception, e:
         print >> sys.stderr, "Error while loading ini file %s" % (
             configFilename)
         print >> sys.stderr, e

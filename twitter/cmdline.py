@@ -395,7 +395,7 @@ class AdminAction(Action):
         af = get_formatter('admin', options)
         try:
             user = self.getUser(twitter, options['extra_args'][0])
-        except TwitterError as e:
+        except TwitterError, e:
             print "There was a problem following or leaving the specified user."
             print "You may be trying to follow a user you are already following;"
             print "Leaving a user you are not currently following;"
@@ -495,7 +495,7 @@ class TwitterShell(Action):
                           Full CMD Line help is appended below for your convinience.'''
                 Action()(twitter, options)
                 options['action'] = ''
-            except NoSuchActionError as e:
+            except NoSuchActionError, e:
                 print >> sys.stderr, e
             except KeyboardInterrupt:
                 print >> sys.stderr, '\n[Keyboard Interrupt]'
@@ -553,7 +553,7 @@ def main(args=sys.argv[1:]):
     arg_options = {}
     try:
         parse_args(args, arg_options)
-    except GetoptError as e:
+    except GetoptError, e:
         print >> sys.stderr, "I can't do that, %s." % (e)
         print >> sys.stderr
         raise SystemExit(1)
@@ -595,10 +595,10 @@ def main(args=sys.argv[1:]):
 
     try:
         Action()(twitter, options)
-    except NoSuchActionError as e:
+    except NoSuchActionError, e:
         print >> sys.stderr, e
         raise SystemExit(1)
-    except TwitterError as e:
+    except TwitterError, e:
         print >> sys.stderr, str(e)
         print >> sys.stderr, "Use 'twitter -h' for help."
         raise SystemExit(1)

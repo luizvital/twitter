@@ -87,7 +87,7 @@ def main(args=sys.argv[1:]):
             if tweets_processed == 0:
                 log_debug("That's it, we got all the tweets. Done.")
                 break
-        except TwitterError as e:
+        except TwitterError, e:
             log_debug("Twitter bailed out. I'm going to sleep a bit then try again")
             sleep(3)
 
