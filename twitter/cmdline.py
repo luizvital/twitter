@@ -350,7 +350,7 @@ class Action(object):
             else:
                 doAction()
         except KeyboardInterrupt:
-            print >> sys.stderr, '\n[Keyboard Interrupt]'s
+            print >> sys.stderr, '\n[Keyboard Interrupt]'
             pass
 
 class NoSuchActionError(Exception):
