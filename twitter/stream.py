@@ -5,7 +5,11 @@ try:
 except ImportError:
     import urllib2 as urllib_request
     import urllib2 as urllib_error
-import json
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 from .api import TwitterCall, wrap_response
 
