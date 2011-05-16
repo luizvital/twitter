@@ -24,9 +24,9 @@ class TwitterJSONIter(object):
                 res, ptr = self.decoder.raw_decode(utf8_buf)
                 self.buf = utf8_buf[ptr:].encode('utf8')
                 yield wrap_response(res, self.handle.headers)
-            except ValueError as e:
+            except ValueError, e:
                 continue
-            except urllib_error.HTTPError as e:
+            except urllib_error.HTTPError, e:
                 raise TwitterHTTPError(e, uri, self.format, arg_data)
 
 class TwitterStreamCall(TwitterCall):
