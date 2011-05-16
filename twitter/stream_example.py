@@ -18,7 +18,7 @@ from .util import printNicely
 
 def main(args=sys.argv[1:]):
     if not args[1:]:
-        print(__doc__)
+        print __doc__
         return 1
 
     # When using twitter stream you must authorize. UserPass or OAuth.

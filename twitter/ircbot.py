@@ -166,7 +166,7 @@ class TwitterBot(object):
         try:
             updates = reversed(self.twitter.statuses.friends_timeline())
         except Exception as e:
-            print("Exception while querying twitter:", file=sys.stderr)
+            print >> sys.stderr, "Exception while querying twitter:"
             traceback.print_exc(file=sys.stderr)
             return
 
@@ -342,10 +342,10 @@ def main():
             raise Exception()
         load_config(configFilename)
     except Exception as e:
-        print("Error while loading ini file %s" %(
-            configFilename), file=sys.stderr)
-        print(e, file=sys.stderr)
-        print(__doc__, file=sys.stderr)
+        print >> sys.stderr, "Error while loading ini file %s" % (
+            configFilename)
+        print >> sys.stderr, e
+        print >> sys.stderr, __doc__
         sys.exit(1)
 
     bot = TwitterBot(configFilename)

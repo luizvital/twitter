@@ -329,7 +329,7 @@ class Action(object):
             else:
                 return answer not in ('no', 'n')
         except EOFError:
-            print(file=sys.stderr) # Put Newline since Enter was never pressed
+            print >> sys.stderr # Put Newline since Enter was never pressed
             # TODO:
                 #   Figure out why on OS X the raw_input keeps raising
                 #   EOFError and is never able to reset and get more input
@@ -350,7 +350,7 @@ class Action(object):
             else:
                 doAction()
         except KeyboardInterrupt:
-            print('\n[Keyboard Interrupt]', file=sys.stderr)
+            print >> sys.stderr, '\n[Keyboard Interrupt]'s
             pass
 
 class NoSuchActionError(Exception):
@@ -396,13 +396,13 @@ class AdminAction(Action):
         try:
             user = self.getUser(twitter, options['extra_args'][0])
         except TwitterError as e:
-            print("There was a problem following or leaving the specified user.")
-            print("You may be trying to follow a user you are already following;")
-            print("Leaving a user you are not currently following;")
-            print("Or the user may not exist.")
-            print("Sorry.")
-            print()
-            print(e)
+            print "There was a problem following or leaving the specified user."
+            print "You may be trying to follow a user you are already following;"
+            print "Leaving a user you are not currently following;"
+            print "Or the user may not exist."
+            print "Sorry."
+            print
+            print e
         else:
             printNicely(af(options['action'], user))
 
@@ -484,26 +484,26 @@ class TwitterShell(Action):
                 elif options['action'] == 'exit':
                     raise SystemExit(0)
                 elif options['action'] == 'shell':
-                    print('Sorry Xzibit does not work here!', file=sys.stderr)
+                    print >> sys.stderr, 'Sorry Xzibit does not work here!'
                     continue
                 elif options['action'] == 'help':
-                    print('''\ntwitter> `action`\n
+                    print >> sys.stderr, '''\ntwitter> `action`\n
                           The Shell Accepts all the command line actions along with:
 
                           exit    Leave the twitter shell (^D may also be used)
 
-                          Full CMD Line help is appended below for your convinience.''', file=sys.stderr)
+                          Full CMD Line help is appended below for your convinience.'''
                 Action()(twitter, options)
                 options['action'] = ''
             except NoSuchActionError as e:
-                print(e, file=sys.stderr)
+                print >> sys.stderr, e
             except KeyboardInterrupt:
-                print('\n[Keyboard Interrupt]', file=sys.stderr)
+                print >> sys.stderr, '\n[Keyboard Interrupt]'
             except EOFError:
-                print(file=sys.stderr)
+                print >> sys.stderr
                 leaving = self.ask(subject='Leave')
                 if not leaving:
-                    print('Excellent!', file=sys.stderr)
+                    print >> sys.stderr, 'Excellent!'
                 else:
                     raise SystemExit(0)
 
@@ -517,7 +517,7 @@ class PythonPromptAction(Action):
 
 class HelpAction(Action):
     def __call__(self, twitter, options):
-        print(__doc__)
+        print __doc__ 
 
 class DoNothingAction(Action):
     def __call__(self, twitter, options):
@@ -554,8 +554,8 @@ def main(args=sys.argv[1:]):
     try:
         parse_args(args, arg_options)
     except GetoptError as e:
-        print("I can't do that, %s." %(e), file=sys.stderr)
-        print(file=sys.stderr)
+        print >> sys.stderr, "I can't do that, %s." % (e)
+        print >> sys.stderr
         raise SystemExit(1)
 
     config_path = os.path.expanduser(
@@ -572,8 +572,8 @@ def main(args=sys.argv[1:]):
 
     if options['refresh'] and options['action'] not in (
         'friends', 'public', 'replies'):
-        print("You can only refresh the friends, public, or replies actions.", file=sys.stderr)
-        print("Use 'twitter -h' for help.", file=sys.stderr)
+        print >> sys.stderr, "You can only refresh the friends, public, or replies actions."
+        print >> sys.stderr, "Use 'twitter -h' for help."
         return 1
 
     oauth_filename = os.path.expanduser(options['oauth_filename'])
@@ -596,9 +596,9 @@ def main(args=sys.argv[1:]):
     try:
         Action()(twitter, options)
     except NoSuchActionError as e:
-        print(e, file=sys.stderr)
+        print >> sys.stderr, e
         raise SystemExit(1)
     except TwitterError as e:
-        print(str(e), file=sys.stderr)
-        print("Use 'twitter -h' for help.", file=sys.stderr)
+        print >> sys.stderr, str(e)
+        print >> sys.stderr, "Use 'twitter -h' for help."
         raise SystemExit(1)

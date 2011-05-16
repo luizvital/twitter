@@ -35,7 +35,7 @@ from .util import printNicely
 
 
 def log_debug(msg):
-    print(msg, file=sys.stderr)
+    print >> sys.stderr, msg
 
 def get_tweets(twitter, screen_name, max_id=None):
     kwargs = dict(count=3200, screen_name=screen_name)
@@ -47,16 +47,16 @@ def get_tweets(twitter, screen_name, max_id=None):
     for tweet in tweets:
         if tweet['id'] == max_id:
             continue
-        print("%s %s\nDate: %s" % (tweet['user']['screen_name'],
+        print "%s %s\nDate: %s" % (tweet['user']['screen_name'],
                                    tweet['id'],
-                                   tweet['created_at']))
+                                   tweet['created_at'])
         if tweet.get('in_reply_to_status_id'):
-            print("In-Reply-To: %s" % tweet['in_reply_to_status_id'])
-        print()
+            print "In-Reply-To: %s" % tweet['in_reply_to_status_id']
+        print
         for line in tweet['text'].splitlines():
             printNicely('    ' + line + '\n')
-        print()
-        print()
+        print
+        print
         max_id = tweet['id']
         n_tweets += 1
     return n_tweets, max_id
@@ -68,7 +68,7 @@ def main(args=sys.argv[1:]):
         domain='api.twitter.com')
 
     if not args:
-        print(__doc__)
+        print __doc__
         return 1
 
     screen_name = args[0]
