@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 from twitter.auth import Auth
 
 from time import time

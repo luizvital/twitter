@@ -56,12 +56,10 @@ CONFIG FILES
 [twitter]
 format: <desired_default_format_for_output>
 prompt: <twitter_shell_prompt e.g. '[cyan]twitter[R]> '>
-
+s
  OAuth authentication tokens are stored in the file .twitter_oauth in your
  home directory.
 """
-
-from __future__ import print_function
 
 CONSUMER_KEY='uS6hO2sV6tDKIOeVjhnFnQ'
 CONSUMER_SECRET='MEYTOS97VvlHX7K1rwHPEqVpTSqZ71HtvoK4sVuYk'

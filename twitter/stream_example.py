@@ -8,8 +8,6 @@ USAGE
 
 """
 
-from __future__ import print_function
-
 import sys
 
 from .stream import TwitterStream
