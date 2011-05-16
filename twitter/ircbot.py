@@ -181,7 +181,7 @@ class TwitterBot(object):
                 # Skip updates beginning with @
                 # TODO This would be better if we only ignored messages
                 #   to people who are not on our following list.
-                if not text.startswith(b"@"):
+                if not text.startswith("@"):
                     msg = "%s %s%s%s %s" %(
                         get_prefix(),
                         IRC_BOLD, update['user']['screen_name'],

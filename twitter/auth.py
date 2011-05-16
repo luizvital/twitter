@@ -36,9 +36,9 @@ class UserPassAuth(Auth):
         return urllib_parse.urlencode(params)
 
     def generate_headers(self):
-        return {b"Authorization": b"Basic " + encodebytes(
+        return {"Authorization": "Basic " + encodebytes(
                 ("%s:%s" %(self.username, self.password))
-                .encode('utf8')).strip(b'\n')
+                .encode('utf8')).strip('\n')
                 }
 
 class NoAuth(Auth):
